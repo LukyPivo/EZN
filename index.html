@@ -3,28 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Školní evidence</title>
-    <link rel="icon" href="logo.png" type="image/png">
+    <title>Evidence věcí</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    
-    <header class="navbar">
-        <div class="nav-left">
-            <img src="logoghb.png" alt="Logo" class="logo">
-            <h1 class="site-title">Evidence Ztracených a Nalezených Věcí</h1>
+<header class="navbar">
+    <div class="nav-left">
+        <img src="logoghb.png" class="logo">
+        <span class="title">Evidence věcí</span>
+    </div>
+
+    <div class="nav-center">
+        <button id="openForm" class="btn-primary">Přidat</button>
+    </div>
+
+    <div class="nav-right">
+        <button class="login-btn">Přihlásit se</button>
+    </div>
+</header>
+
+<main class="content">
+    <div id="cards" class="cards"></div>
+</main>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+    <div class="modal-box">
+        <h2>Přidat věc</h2>
+
+        <input id="name" type="text" placeholder="Název věci">
+        <input id="date" type="date">
+        <input id="place" type="text" placeholder="Místo">
+        <textarea id="desc" placeholder="Popis"></textarea>
+
+        <input id="image" type="file" accept="image/*">
+
+        <select id="status">
+            <option value="found">Nalezená</option>
+            <option value="lost">Ztracená</option>
+        </select>
+
+        <div class="modal-actions">
+            <button id="cancel" class="btn-outline">Zrušit</button>
+            <button id="save" class="btn-primary">Uložit</button>
         </div>
+    </div>
+</div>
 
-        <div class="nav-right">
-            <button class="login-btn">Přihlásit se</button>
-        </div>
-    </header>
-
-    
-    <main class="content">
-        <button class="add-btn">+</button>
-    </main>
-
+<script src="script.js"></script>
 </body>
 </html>

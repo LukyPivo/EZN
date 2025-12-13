@@ -1,87 +1,186 @@
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Inter", sans-serif;
+    font-family: Inter, sans-serif;
 }
 
 body {
-    background: #f5f9fc;
+    background: #f4f7fb;
 }
 
-
+/* NAVBAR */
 .navbar {
     position: fixed;
     top: 0;
-    left: 0;
     width: 100%;
     height: 80px;
     background: white;
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
     padding: 0 40px;
-    border-bottom: 1px solid #e5e7eb;
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-    z-index: 999;
-}
-
-
-.nav-left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+    z-index: 100;
 }
 
 .logo {
     height: 80px;
-    width: auto;
 }
 
-.site-title {
-    font-size: 28px;
+.title {
+    font-size: 27px;
     font-weight: 700;
     color: #ff7a00;
+    margin-left: 12px;
 }
 
-
-.login-btn {
-    padding: 10px 20px;
-    background: #1e293b;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 15px;
-    transition: 0.2s;
+.nav-left {
+    display: flex;
+    align-items: center;
 }
 
-.login-btn:hover {
-    background: #334155;
-}
-
-
-.content {
-    margin-top: 80px; 
-    padding: 40px;
-}
-
-
-.add-btn {
-    width: 70px;
-    height: 70px;
-    border: none;
-    border-radius: 20px;
+.btn-primary {
     background: #ff7a00;
     color: white;
-    font-size: 40px;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 999px;
     cursor: pointer;
-    transition: 0.2s;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    font-weight: 600;
 }
 
-.add-btn:hover {
-    background: #ff8930;
-    transform: translateY(-5px);
+.btn-outline {
+    background: transparent;
+    border: 2px solid #e5e7eb;
+    padding: 10px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+.login-btn {
+    background: #1f2937;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 999px;
+    cursor: pointer;
+}
+
+/* CONTENT */
+.content {
+    padding: 120px 40px 40px;
+}
+
+/* CARDS */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: white;
+    border-radius: 25px;
+    padding: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+    border: 3px solid transparent;
+}
+
+.card.found {
+    border-color: #3b82f6;
+}
+
+.card.lost {
+    border-color: #ef4444;
+}
+
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.card h3 {
+    margin: 10px 0 5px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #555;
+}
+
+/* MODAL */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-box {
+    background: white;
+    padding: 30px;
+    width: 400px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.modal-box input,
+.modal-box textarea,
+.modal-box select {
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+/* ===== VYSTŘEDĚNÍ TLAČÍTKA V MENU ===== */
+.nav-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* ===== DESIGN TLAČÍTKA PŘIDAT ===== */
+.btn-primary {
+    background: linear-gradient(135deg, #ff7a00, #ff9a3c);
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 999px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+
+    box-shadow: 0 6px 20px rgba(255,122,0,0.45);
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        filter 0.2s ease;
+}
+
+/* HOVER EFEKT */
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 14px 32px rgba(255,122,0,0.6);
+    filter: brightness(1.05);
+}
+
+/* KLIK */
+.btn-primary:active {
+    transform: scale(0.97);
 }
