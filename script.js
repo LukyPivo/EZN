@@ -37,12 +37,12 @@ card.innerHTML += `
         <button class="btn-delete">Smazat</button>
     </div>
 `;
-// označit jako vyřízeno
+//vyřízeno
 card.querySelector(".btn-done").onclick = () => {
     card.classList.toggle("done");
 };
 
-// smazání
+//smazání
 card.querySelector(".btn-delete").onclick = () => {
     card.remove();
 };
