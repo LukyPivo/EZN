@@ -5,6 +5,7 @@
     font-family: Inter, sans-serif;
 }
 
+/* pozadí */
 body {
     background: #f4f7fb;
 }
@@ -24,6 +25,7 @@ body {
     z-index: 100;
 }
 
+/* logo a název webu */
 .logo {
     height: 80px;
 }
@@ -40,6 +42,7 @@ body {
     align-items: center;
 }
 
+/* styly tlacitek */
 .btn-primary {
     background: #ff7a00;
     color: white;
@@ -52,7 +55,7 @@ body {
 
 .btn-outline {
     background: transparent;
-    border: 2px solid #e5e7eb;
+    border: 3px solid #ff7a00;
     padding: 10px 20px;
     border-radius: 999px;
     cursor: pointer;
@@ -67,18 +70,18 @@ body {
     cursor: pointer;
 }
 
-/* CONTENT */
 .content {
     padding: 120px 40px 40px;
 }
 
-/* CARDS */
+/* GRID KARET */
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 30px;
 }
 
+/* STYL KARTY */
 .card {
     background: white;
     border-radius: 25px;
@@ -87,6 +90,7 @@ body {
     border: 3px solid transparent;
 }
 
+/* barva podle stavu */
 .card.found {
     border-color: #3b82f6;
 }
@@ -95,6 +99,7 @@ body {
     border-color: #ef4444;
 }
 
+/* obrázek v kartě */
 .card img {
     width: 100%;
     height: 160px;
@@ -102,6 +107,7 @@ body {
     border-radius: 15px;
 }
 
+/* text v kartě */
 .card h3 {
     margin: 10px 0 5px;
 }
@@ -111,7 +117,7 @@ body {
     color: #555;
 }
 
-/* MODAL */
+/* formulář */
 .modal {
     position: fixed;
     inset: 0;
@@ -121,10 +127,12 @@ body {
     justify-content: center;
 }
 
+/* zobrazení formuláře */
 .modal.show {
     display: flex;
 }
 
+/* obsah formuláře */
 .modal-box {
     background: white;
     padding: 30px;
@@ -135,6 +143,7 @@ body {
     gap: 12px;
 }
 
+/* inputy(popis věci) ve formuláři */
 .modal-box input,
 .modal-box textarea,
 .modal-box select {
@@ -143,19 +152,21 @@ body {
     border: 1px solid #ddd;
 }
 
+/* tlačítka v formuláři */
 .modal-actions {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
 }
-/* ===== VYSTŘEDĚNÍ TLAČÍTKA V MENU ===== */
+
+/* ==========================HLAVNI TLACITKO PŘIDAT===========================*/
 .nav-center {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
 
-/* ===== DESIGN TLAČÍTKA PŘIDAT ===== */
+
 .btn-primary {
     background: linear-gradient(135deg, #ff7a00, #ff9a3c);
     color: white;
@@ -165,7 +176,6 @@ body {
     font-size: 15px;
     font-weight: 700;
     cursor: pointer;
-
     box-shadow: 0 6px 20px rgba(255,122,0,0.45);
     transition:
         transform 0.2s ease,
@@ -173,23 +183,25 @@ body {
         filter 0.2s ease;
 }
 
-/* HOVER EFEKT */
+/* hover efekt */
 .btn-primary:hover {
     transform: translateY(-3px) scale(1.05);
     box-shadow: 0 14px 32px rgba(255,122,0,0.6);
     filter: brightness(1.05);
 }
 
-/* KLIK */
+/* po kliknutí */
 .btn-primary:active {
     transform: scale(0.97);
 }
+
+/* VYŘÍZENÁ KARTA */
 .card.done {
     opacity: 0.5;
     filter: grayscale(1);
 }
 
-/* tlačítka v kartě */
+/* TLAČÍTKA V KARTĚ */
 .card-actions {
     display: flex;
     justify-content: space-between;
@@ -206,10 +218,10 @@ body {
 
 .btn-done {
     background: #22c55e;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .btn-delete {
     background: #ef4444;
-    color: white;
+    color: rgb(0, 0, 0);
 }

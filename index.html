@@ -2,55 +2,76 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    <!--na mobil i PC -->
     <title>Evidence GHB ztrát</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<!-- horni panel-->
 <header class="navbar">
+
+    <!--logo a název -->
     <div class="nav-left">
-        <img src="logoghb.png" class="logo">
+        <img src="logoghb.png" class="logo"> 
         <span class="title">Evidence věcí</span>
     </div>
 
+    <!--tlačítko přidat-->
     <div class="nav-center">
-        <button id="openForm" class="btn-primary">Přidat</button>
+        <button id="openForm" class="btn-primary">
+            Přidat
+        </button>
+        <!--otevírá formulář-->
     </div>
 
+    <!--přihlášení-->
     <div class="nav-right">
-        <button class="login-btn">Přihlásit se</button>
+        <button class="login-btn">
+            Přihlásit se
+        </button>
     </div>
+
 </header>
 
+<!--hlavni obsah-->
 <main class="content">
+
+    <!--Kontejner pro karty-->
     <div id="cards" class="cards"></div>
+
 </main>
 
-<!-- MODAL -->
+<!--furmulář-->
 <div class="modal" id="modal">
     <div class="modal-box">
         <h2>Přidat věc</h2>
+        <input id="name" type="text" placeholder="Název věci">                  <!-- Název věci -->
+        <input id="date" type="date">                                           <!-- datum -->
+        <input id="place" type="text" placeholder="Místo">                      <!--místo-->
+        <textarea id="desc" placeholder="Popis"></textarea>                     <!--popis -->
+        <input id="image" type="file" accept="image/*">                         <!-- Nahrání fotky -->
 
-        <input id="name" type="text" placeholder="Název věci">
-        <input id="date" type="date">
-        <input id="place" type="text" placeholder="Místo">
-        <textarea id="desc" placeholder="Popis"></textarea>
-
-        <input id="image" type="file" accept="image/*">
-
+        <!--stav věci-->
         <select id="status">
             <option value="found">Nalezená</option>
             <option value="lost">Ztracená</option>
         </select>
 
+        <!--tlacitka dole-->
         <div class="modal-actions">
-            <button id="cancel" class="btn-outline">Zrušit</button>
-            <button id="save" class="btn-primary">Uložit</button>
+            <button id="cancel" class="btn-outline">
+                Zrušit
+            </button>
+
+            <button id="save" class="btn-primary">
+                Uložit
+            </button>
         </div>
+
     </div>
 </div>
-
 <script src="script.js"></script>
+
 </body>
 </html>
