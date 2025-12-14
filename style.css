@@ -69,7 +69,10 @@ body {
     border-radius: 999px;
     cursor: pointer;
 }
-
+.login-btn:hover {
+    background: #111827;
+    transform: translateY(-3px) scale(1.05);
+}  
 .content {
     padding: 120px 40px 40px;
 }
