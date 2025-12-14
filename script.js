@@ -26,12 +26,26 @@ saveBtn.onclick = () => {
         card.appendChild(img);
     }
 
-    card.innerHTML += `
-        <h3>${name}</h3>
-        <p>${place}</p>
-        <p>${date}</p>
-        <p>${desc}</p>
-    `;
+card.innerHTML += `
+    <h3>${name}</h3>
+    <p>${place}</p>
+    <p>${date}</p>
+    <p>${desc}</p>
+
+    <div class="card-actions">
+        <button class="btn-done">Vyřízeno</button>
+        <button class="btn-delete">Smazat</button>
+    </div>
+`;
+// označit jako vyřízeno
+card.querySelector(".btn-done").onclick = () => {
+    card.classList.toggle("done");
+};
+
+// smazání
+card.querySelector(".btn-delete").onclick = () => {
+    card.remove();
+};
 
     cards.appendChild(card);
 
