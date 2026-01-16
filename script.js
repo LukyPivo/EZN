@@ -56,14 +56,14 @@ saveBtn.onclick = () => {
     `;
 
    // //VYŘÍZENO
-   // card.querySelector(".btn-done").onclick = () => {                           // přepíná stav vyřízeno / nevyřízeno
-  //      card.classList.toggle("done");
-  //  };
+    card.querySelector(".btn-done").onclick = () => {                           // přepíná stav vyřízeno / nevyřízeno
+        card.classList.toggle("done");
+    };
 
     //SMAZAT
-  //  card.querySelector(".btn-delete").onclick = () => {
-  //      card.remove();
-   // };
+  card.querySelector(".btn-delete").onclick = () => {
+        card.remove();
+    };
 
     // přidání karty na stránku
     cards.appendChild(card);
