@@ -1,9 +1,16 @@
+const modal = document.getElementById("modal");
+const openBtn = document.getElementById("openForm");
+const cancelBtn = document.getElementById("cancel");
+const saveBtn = document.getElementById("save");
+const cards = document.getElementById("cards");
 const modal = document.getElementById("modal");                                 //formulař
 const openBtn = document.getElementById("openForm");                            //tlacitko přidat
 const cancelBtn = document.getElementById("cancel");                            //lacitko zrušit
 const saveBtn = document.getElementById("save");                                //tlačítko ulozit
 const cards = document.getElementById("cards");                                 // kontejner pridavani karet
 
+openBtn.onclick = () => modal.classList.add("show");
+cancelBtn.onclick = () => modal.classList.remove("show");
 //OTEVŘENÍ A ZAVŘENÍ FORMULÁŘE
 openBtn.onclick = () => modal.classList.add("show");                            // po kliknutí na přidat se zobrazí formular
 cancelBtn.onclick = () => modal.classList.remove("show");                       //zavře po kliknutí na zrušit
@@ -12,7 +19,14 @@ cancelBtn.onclick = () => modal.classList.remove("show");                       
 //ULOŽENÍ NOVE VĚCI 
 
 saveBtn.onclick = () => {
+    const name = document.getElementById("name").value;
+    const date = document.getElementById("date").value;
+    const place = document.getElementById("place").value;
+    const desc = document.getElementById("desc").value;
+    const status = document.getElementById("status").value;
+    const imageInput = document.getElementById("image");
 
+    if (!name) return alert("Vyplň název");
     //nacteni z formuláře
     const name = document.getElementById("name").value;                         // název věci
     const date = document.getElementById("date").value;                         // datum
@@ -21,6 +35,8 @@ saveBtn.onclick = () => {
     const status = document.getElementById("status").value;                     // found / lost
     const imageInput = document.getElementById("image");                        // obrázek
 
+    const card = document.createElement("div");
+    card.className = `card ${status}`;
     //OVĚŘENÍ jestli je vše vyplněné
     if (!name) return alert("Vyplň název");
     if (!date) return alert("Vyplň datum");
@@ -39,7 +55,26 @@ saveBtn.onclick = () => {
         card.appendChild(img);
     }
 
+card.innerHTML += `
+    <h3>${name}</h3>
+    <p>${place}</p>
+    <p>${date}</p>
+    <p>${desc}</p>
 
+    <div class="card-actions">
+        <button class="btn-done">Vyřízeno</button>
+        <button class="btn-delete">Smazat</button>
+    </div>
+`;
+//vyřízeno
+card.querySelector(".btn-done").onclick = () => {
+    card.classList.toggle("done");
+};
+
+//smazání
+card.querySelector(".btn-delete").onclick = () => {
+    card.remove();
+};
     //=============================================================================================================================
 
 
@@ -52,16 +87,19 @@ saveBtn.onclick = () => {
         <p>${date}</p>
         <p>${desc}</p>
 
-      
+        <div class="card-actions">
+            <button class="btn-done">Vyřízeno</button>
+            <button class="btn-delete">Smazat</button>
+        </div>
     `;
 
-   // //VYŘÍZENO
+    //VYŘÍZENO
     card.querySelector(".btn-done").onclick = () => {                           // přepíná stav vyřízeno / nevyřízeno
         card.classList.toggle("done");
     };
 
     //SMAZAT
-  card.querySelector(".btn-delete").onclick = () => {
+    card.querySelector(".btn-delete").onclick = () => {
         card.remove();
     };
 
@@ -70,8 +108,8 @@ saveBtn.onclick = () => {
 
     // zavření fromuláře
     modal.classList.remove("show");
+    document.querySelectorAll(".modal-box input, textarea").forEach(i => i.value = "");
 
     // vymazání formuláře
     document.querySelectorAll(".modal-box input, textarea")
         .forEach(i => i.value = "");
-};
