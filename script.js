@@ -59,7 +59,7 @@ saveBtn.onclick = () => {
     `;
 
    //VYŘÍZENO
-    card.querySelector(".btn-done").onclick = () => {                           // přepíná stav vyřízeno / nevyřízeno
+    card.querySelector(".btn-done").onclick = () => {                           // přepiná stav vyřízeno / nevyřízeno
         card.classList.toggle("done");
     };
 
