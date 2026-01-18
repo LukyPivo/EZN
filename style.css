@@ -5,11 +5,12 @@
     font-family: Inter, sans-serif;
 }
 
+/* pozadí */
 body {
     background: #f4f7fb;
 }
 
-/* ================= NAVBAR ================= */
+/* NAVBAR */
 .navbar {
     position: fixed;
     top: 0;
@@ -41,7 +42,7 @@ body {
     align-items: center;
 }
 
-/* TLACITKA*/
+/* styly tlacitek */
 .btn-primary {
     background: #ff7a00;
     color: white;
@@ -68,12 +69,10 @@ body {
     border-radius: 999px;
     cursor: pointer;
 }
-
 .login-btn:hover {
     background: #111827;
     transform: translateY(-3px) scale(1.05);
-}
-
+}  
 .content {
     padding: 120px 40px 40px;
 }
@@ -121,7 +120,7 @@ body {
     color: #555;
 }
 
-/* FORMULÁŘ */
+/* formulář */
 .modal {
     position: fixed;
     inset: 0;
@@ -170,6 +169,7 @@ body {
     transform: translateX(-50%);
 }
 
+
 .btn-primary {
     background: linear-gradient(135deg, #ff7a00, #ff9a3c);
     color: white;
@@ -204,7 +204,7 @@ body {
     filter: grayscale(1);
 }
 
-/* TLACITKA V KARTE */
+/* TLAČÍTKA V KARTĚ */
 .card-actions {
     display: flex;
     justify-content: space-between;
