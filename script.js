@@ -18,19 +18,21 @@ saveBtn.onclick = () => {
     const date = document.getElementById("date").value;                         // datum
     const place = document.getElementById("place").value;                       // místo
     const desc = document.getElementById("desc").value;                         // popis
-   // const status = document.getElementById("status").value;                     // found / lost
+    const status = document.getElementById("status").value;                     // found / lost
     const imageInput = document.getElementById("image");                        // obrázek
 
     //OVĚŘENÍ jestli je vše vyplněné
     if (!name) return alert("Vyplň název");
     if (!date) return alert("Vyplň datum");
     if (!place) return alert("Vyplň místo nalezení");
-   // if (!status) return alert("Veber sttus věci");
+    if (!status) return alert("Veber sttus věci");
     if (!name || !image)  return alert("Vyplň obrazek nebo popis");
    
     const card = document.createElement("div");                                 // vytvoření nové karty
     card.className = `card ${status}`;                                          // třída card a nalezena nebo ztracena kvuli barvě
 
+    //OBRÁZEK
+    // pokud je vybrana fotka
     if (imageInput.files[0]) {
         const img = document.createElement("img");
         img.src = URL.createObjectURL(imageInput.files[0]);
@@ -50,21 +52,26 @@ saveBtn.onclick = () => {
         <p>${date}</p>
         <p>${desc}</p>
 
-      
+        <div class="card-actions">
+            <button class="btn-done">Vyřízeno</button>
+            <button class="btn-delete">Smazat</button>
+        </div>
     `;
 
-   // //VYŘÍZENO
-   // card.querySelector(".btn-done").onclick = () => {                           // přepíná stav vyřízeno / nevyřízeno
-  //      card.classList.toggle("done");
-  //  };
+    //VYŘÍZENO
+    card.querySelector(".btn-done").onclick = () => {                           // přepíná stav vyřízeno / nevyřízeno
+        card.classList.toggle("done");
+    };
 
     //SMAZAT
-  //  card.querySelector(".btn-delete").onclick = () => {
-  //      card.remove();
-   // };
+    card.querySelector(".btn-delete").onclick = () => {
+        card.remove();
+    };
 
+    // přidání karty na stránku
     cards.appendChild(card);
 
+    // zavření fromuláře
     modal.classList.remove("show");
 
     // vymazání formuláře
