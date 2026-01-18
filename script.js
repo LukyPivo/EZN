@@ -18,14 +18,14 @@ saveBtn.onclick = () => {
     const date = document.getElementById("date").value;                         // datum
     const place = document.getElementById("place").value;                       // místo
     const desc = document.getElementById("desc").value;                         // popis
-   // const status = document.getElementById("status").value;                     // found / lost
+    const status = document.getElementById("status").value;                     // found / lost
     const imageInput = document.getElementById("image");                        // obrázek
 
     //OVĚŘENÍ jestli je vše vyplněné
     if (!name) return alert("Vyplň název");
     if (!date) return alert("Vyplň datum");
     if (!place) return alert("Vyplň místo nalezení");
-   // if (!status) return alert("Veber sttus věci");
+    if (!status) return alert("Veber sttus věci");
     if (!name || !image)  return alert("Vyplň obrazek nebo popis");
    
     const card = document.createElement("div");                                 // vytvoření nové karty
