@@ -52,18 +52,21 @@ saveBtn.onclick = () => {
         <p>${date}</p>
         <p>${desc}</p>
 
-      
+        <!--<div class="card-actions">
+            <button class="btn-done">Vyřízeno</button>
+            <button class="btn-delete">Smazat</button>
+        </div>-->   
     `;
 
-   // //VYŘÍZENO
-   // card.querySelector(".btn-done").onclick = () => {                           // přepíná stav vyřízeno / nevyřízeno
-  //      card.classList.toggle("done");
-  //  };
+   //VYŘÍZENO
+    card.querySelector(".btn-done").onclick = () => {                           // přepíná stav vyřízeno / nevyřízeno
+        card.classList.toggle("done");
+    };
 
     //SMAZAT
-  //  card.querySelector(".btn-delete").onclick = () => {
-  //      card.remove();
-   // };
+    card.querySelector(".btn-delete").onclick = () => {
+        card.remove();
+    };
 
     // přidání karty na stránku
     cards.appendChild(card);
