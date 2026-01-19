@@ -1,3 +1,12 @@
+const loginModal = document.getElementById("loginModal");
+const loginBtn = document.getElementById("loginBtn");
+const loginCancel = document.getElementById("loginCancel");
+const loginSubmit = document.getElementById("loginSubmit");
+
+let loggedIn = false;
+
+
+
 const modal = document.getElementById("modal");                                 //formulař
 const openBtn = document.getElementById("openForm");                            //tlacitko přidat
 const cancelBtn = document.getElementById("cancel");                            //lacitko zrušit
@@ -65,8 +74,13 @@ saveBtn.onclick = () => {
 
     //SMAZAT
     card.querySelector(".btn-delete").onclick = () => {
-        card.remove();
+    if (!loggedIn) {
+        alert("Mazat může jen přihlášený");
+        return;
+    }
+    card.remove();
     };
+
 
     // přidání karty na stránku
     cards.appendChild(card);
@@ -77,4 +91,32 @@ saveBtn.onclick = () => {
     // vymazání formuláře
     document.querySelectorAll(".modal-box input, textarea")
         .forEach(i => i.value = "");
+
+        
+        loginBtn.onclick = () => {
+    if (loggedIn) {
+        loggedIn = false;
+        loginBtn.innerText = "Přihlásit se";
+    } else {
+        loginModal.classList.add("show");
+    }
+    };
+
+    loginCancel.onclick = () => {
+    loginModal.classList.remove("show");
+    };
+
+    loginSubmit.onclick = () => {
+    const user = document.getElementById("loginUser").value;
+    const pass = document.getElementById("loginPass").value;
+
+    if (user === "admin" && pass === "1234") {
+        loggedIn = true;
+        loginBtn.innerText = "Odhlásit se";
+        loginModal.classList.remove("show");
+    } else {
+        alert("Špatné jméno nebo heslo");
+    }
+    };
+
 };

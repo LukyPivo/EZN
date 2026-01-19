@@ -25,12 +25,10 @@
         <!--otevírá formulář-->
     </div>
 
-    <!--přihlášení-->
-    <div class="nav-right">
-        <button class="login-btn">
-            Přihlásit se
-        </button>
-    </div>
+<button class="login-btn" id="loginBtn">
+    Přihlásit se
+</button>
+
 
 </header>
 
@@ -71,6 +69,20 @@
 
     </div>
 </div>
+<div class="modal" id="loginModal">
+    <div class="modal-box">
+        <h2>Přihlášení</h2>
+
+        <input id="loginUser" type="text" placeholder="Uživatelské jméno">
+        <input id="loginPass" type="password" placeholder="Heslo">
+
+        <div class="modal-actions">
+            <button id="loginCancel" class="btn-outline">Zrušit</button>
+            <button id="loginSubmit" class="btn-primary">Přihlásit</button>
+        </div>
+    </div>
+</div>
+
 <script src="script.js"></script>
 
 </body>
