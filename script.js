@@ -8,13 +8,21 @@ let loggedIn = false;
 
 
 const modal = document.getElementById("modal");                                 //formulař
-const openBtn = document.getElementById("openForm");                            //tlacitko přidat
+const openFoundBtn = document.getElementById("openFound");                      //tlacitko nalezená
+const openLostBtn = document.getElementById("openLost");                        //tlacitko ztracená
 const cancelBtn = document.getElementById("cancel");                            //lacitko zrušit
 const saveBtn = document.getElementById("save");                                //tlačítko ulozit
 const cards = document.getElementById("cards");                                 // kontejner pridavani karet
 
 //OTEVŘENÍ A ZAVŘENÍ FORMULÁŘE
-openBtn.onclick = () => modal.classList.add("show");                            // po kliknutí na přidat se zobrazí formular
+openFoundBtn.onclick = () => {
+    document.getElementById("status").value = "found";
+    modal.classList.add("show");
+};
+openLostBtn.onclick = () => {
+    document.getElementById("status").value = "lost";
+    modal.classList.add("show");
+};
 cancelBtn.onclick = () => modal.classList.remove("show");                       //zavře po kliknutí na zrušit
 
 
