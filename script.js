@@ -170,8 +170,8 @@ function renderCard(doc) {
     const content = document.createElement("div");
     content.innerHTML = `
         <h3>${data.name}</h3>
-        <p>📍 ${data.place}</p>
-        <p>📅 ${data.date}</p>
+        <p>${data.place}</p>
+        <p>${data.date}</p>
         <p>${data.desc || ""}</p>
         <div class="card-actions">
             <button class="btn-done">${data.done ? "Obnovit" : "Vyřízeno"}</button>
