@@ -1,130 +1,194 @@
-const loginModal = document.getElementById("loginModal");
-const loginBtn = document.getElementById("loginBtn");
-const loginCancel = document.getElementById("loginCancel");
-const loginSubmit = document.getElementById("loginSubmit");
+//FIREBASE CONFIG
+const firebaseConfig = {
+    apiKey: "AIzaSyCpdBUnMwa7LR2_ZONu7BUG3trooman_Q4",
+    authDomain: "ghb-evidence.firebaseapp.com",
+    projectId: "ghb-evidence",
+    storageBucket: "ghb-evidence.firebasestorage.app",
+    messagingSenderId: "473485992439",
+    appId: "1:473485992439:web:1150e92edbbe55c3594ef2",
+    measurementId: "G-JQGNHWTQ28"
+};
 
+firebase.initializeApp(firebaseConfig);
+const db   = firebase.firestore();
+const auth = firebase.auth();
+
+// stav přihlášení (true = admin, false = běžný uživatel)
 let loggedIn = false;
 
+// ELEMENTY
+const modal       = document.getElementById("modal");
+const loginModal  = document.getElementById("loginModal");
+const cards       = document.getElementById("cards");
+const loginBtn    = document.getElementById("loginBtn");
+const loginError  = document.getElementById("loginError");
+const loadingOvrl = document.getElementById("loadingOverlay");
+
+//  PŘIHLÁŠENÍ / ODHÁŠENÍ
+auth.onAuthStateChanged(user => {
+    loggedIn = !!user;
+    loginBtn.innerText = user ? "Odhlásit se" : "Přihlásit se";
+});
+
+loginBtn.onclick = () => {
+    if (loggedIn) {
+        auth.signOut();
+    } else {
+        loginModal.classList.add("show");
+        loginError.style.display = "none";
+    }
+};
+
+document.getElementById("loginCancel").onclick = () => loginModal.classList.remove("show");
+
+document.getElementById("loginSubmit").onclick = async () => {
+    const email = document.getElementById("loginEmail").value.trim();
+    const pass  = document.getElementById("loginPass").value;
+    try {
+        await auth.signInWithEmailAndPassword(email, pass);
+        loginModal.classList.remove("show");
+    } catch {
+        loginError.textContent = "Špatný e-mail nebo heslo.";
+        loginError.style.display = "block";
+    }
+};
 
 
-const modal = document.getElementById("modal");                                 //formulař
-const openFoundBtn = document.getElementById("openFound");                      //tlacitko nalezená
-const openLostBtn = document.getElementById("openLost");                        //tlacitko ztracená
-const cancelBtn = document.getElementById("cancel");                            //lacitko zrušit
-const saveBtn = document.getElementById("save");                                //tlačítko ulozit
-const cards = document.getElementById("cards");                                 // kontejner pridavani karet
-
-//OTEVŘENÍ A ZAVŘENÍ FORMULÁŘE
-openFoundBtn.onclick = () => {
+//  OTEVŘENÍ FORMULÁŘE
+document.getElementById("openFound").onclick = () => {
     document.getElementById("status").value = "found";
     modal.classList.add("show");
 };
-openLostBtn.onclick = () => {
+document.getElementById("openLost").onclick = () => {
     document.getElementById("status").value = "lost";
     modal.classList.add("show");
 };
-cancelBtn.onclick = () => modal.classList.remove("show");                       //zavře po kliknutí na zrušit
+document.getElementById("cancel").onclick = () => modal.classList.remove("show");
 
 
-//ULOŽENÍ NOVE VĚCI 
+//  ZMENŠENÍ OBRÁZKU max 800px
+//  Firestore limit je 1 MB na dokument
+function resizeImage(file, maxSize = 800, quality = 0.7) {
+    return new Promise((resolve) => {
+        const reader = new FileReader();
+        reader.onload = e => {
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement("canvas");
+                let w = img.width, h = img.height;
 
-saveBtn.onclick = () => {
+                // Zmenšit na max 800px (zachovat poměr stran)
+                if (w > h && w > maxSize) { h = h * maxSize / w; w = maxSize; }
+                else if (h > maxSize)     { w = w * maxSize / h; h = maxSize; }
 
-    //nacteni z formuláře
-    const name = document.getElementById("name").value;                         // název věci
-    const date = document.getElementById("date").value;                         // datum
-    const place = document.getElementById("place").value;                       // místo
-    const desc = document.getElementById("desc").value;                         // popis
-    const status = document.getElementById("status").value;                     // found / lost
-    const imageInput = document.getElementById("image");                        // obrázek
+                canvas.width  = w;
+                canvas.height = h;
+                canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+                resolve(canvas.toDataURL("image/jpeg", quality));
+            };
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    });
+}
 
-    //OVĚŘENÍ jestli je vše vyplněné
-    if (!name) return alert("Vyplň název");
-    if (!date) return alert("Vyplň datum");
-    if (!place) return alert("Vyplň místo nalezení");
-    if (!status) return alert("Veber sttus věci");
-    if (!name || !image)  return alert("Vyplň obrazek nebo popis");
-   
-    const card = document.createElement("div");                                 // vytvoření nové karty
-    card.className = `card ${status}`;                                          // třída card a nalezena nebo ztracena kvuli barvě
 
-    //OBRÁZEK
-    // pokud je vybrana fotka
-    if (imageInput.files[0]) {
+//  ULOŽENÍ → Firestore (obrázek jako base64)
+document.getElementById("save").onclick = async () => {
+    const name       = document.getElementById("name").value.trim();
+    const date       = document.getElementById("date").value;
+    const place      = document.getElementById("place").value.trim();
+    const desc       = document.getElementById("desc").value.trim();
+    const status     = document.getElementById("status").value;
+    const imageInput = document.getElementById("image");
+
+    if (!name)  return alert("Vyplň název");
+    if (!date)  return alert("Vyplň datum");
+    if (!place) return alert("Vyplň místo");
+
+    loadingOvrl.style.display = "flex";
+
+    try {
+        let imageBase64 = null;
+
+        if (imageInput.files[0]) {
+            imageBase64 = await resizeImage(imageInput.files[0]);
+        }
+
+        await db.collection("veci").add({
+            name,
+            date,
+            place,
+            desc,
+            status,
+            imageBase64,   // uloženo přímo do Firestore, žádný Storage
+            done: false,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        modal.classList.remove("show");
+        document.querySelectorAll(".modal-box input, .modal-box textarea")
+            .forEach(i => i.value = "");
+
+    } catch (err) {
+        console.error(err);
+        alert("Chyba při ukládání: " + err.message);
+    } finally {
+        loadingOvrl.style.display = "none";
+    }
+};
+
+
+//  NAČTENÍ KARET Z FIRESTORE (real-time)
+db.collection("veci")
+  .orderBy("createdAt", "desc")
+  .onSnapshot(snapshot => {
+      snapshot.docChanges().forEach(change => {
+          const el = document.getElementById(`card-${change.doc.id}`);
+          if (change.type === "removed") { if (el) el.remove(); return; }
+          if (change.type === "modified") { if (el) el.remove(); }
+          renderCard(change.doc);
+      });
+  });
+
+
+//  VYTVOŘENÍ KARTY
+function renderCard(doc) {
+    const data = doc.data();
+    const id   = doc.id;
+
+    const card = document.createElement("div");
+    card.id        = `card-${id}`;
+    card.className = `card ${data.status}${data.done ? " done" : ""}`;
+
+    if (data.imageBase64) {
         const img = document.createElement("img");
-        img.src = URL.createObjectURL(imageInput.files[0]);
+        img.src = data.imageBase64;
         card.appendChild(img);
     }
 
-
-    //=============================================================================================================================
-
-
-
-
-    //OBSAH KARTY
-    card.innerHTML += `
-        <h3>${name}</h3>
-        <p>${place}</p>
-        <p>${date}</p>
-        <p>${desc}</p>
-
+    const content = document.createElement("div");
+    content.innerHTML = `
+        <h3>${data.name}</h3>
+        <p>📍 ${data.place}</p>
+        <p>📅 ${data.date}</p>
+        <p>${data.desc || ""}</p>
         <div class="card-actions">
-            <button class="btn-done">Vyřízeno</button>
+            <button class="btn-done">${data.done ? "Obnovit" : "Vyřízeno"}</button>
             <button class="btn-delete">Smazat</button>
         </div>
     `;
+    card.appendChild(content);
 
-    //VYŘÍZENO
-    card.querySelector(".btn-done").onclick = () => {                           // přepíná stav vyřízeno / nevyřízeno
-        card.classList.toggle("done");
+    content.querySelector(".btn-done").onclick = async () => {
+        await db.collection("veci").doc(id).update({ done: !data.done });
     };
 
-    //SMAZAT
-    card.querySelector(".btn-delete").onclick = () => {
-    if (!loggedIn) {
-        alert("Mazat může jen přihlášený");
-        return;
-    }
-    card.remove();
+    content.querySelector(".btn-delete").onclick = async () => {
+        if (!loggedIn) { alert("Mazat může jen přihlášený administrátor."); return; }
+        if (!confirm(`Opravdu smazat „${data.name}"?`)) return;
+        await db.collection("veci").doc(id).delete();
     };
 
-
-    // přidání karty na stránku
-    cards.appendChild(card);
-
-    // zavření fromuláře
-    modal.classList.remove("show");
-
-    // vymazání formuláře
-    document.querySelectorAll(".modal-box input, textarea")
-        .forEach(i => i.value = "");
-
-        
-        loginBtn.onclick = () => {
-    if (loggedIn) {
-        loggedIn = false;
-        loginBtn.innerText = "Přihlásit se";
-    } else {
-        loginModal.classList.add("show");
-    }
-    };
-
-    loginCancel.onclick = () => {
-    loginModal.classList.remove("show");
-    };
-
-    loginSubmit.onclick = () => {
-    const user = document.getElementById("loginUser").value;
-    const pass = document.getElementById("loginPass").value;
-
-    if (user === "admin" && pass === "1234") {
-        loggedIn = true;
-        loginBtn.innerText = "Odhlásit se";
-        loginModal.classList.remove("show");
-    } else {
-        alert("Špatné jméno nebo heslo");
-    }
-    };
-
-};
+    cards.prepend(card);
+}
