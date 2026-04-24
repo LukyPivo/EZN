@@ -237,3 +237,18 @@ body {
     background: #ef4444;
     color: rgb(0, 0, 0);
 }
+@media (max-width: 768px) {
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+    .buttons {
+  margin-top: 16px;
+}
+
+button {
+  max-width: 100%;
+  word-wrap: break-word;
+}
+}
