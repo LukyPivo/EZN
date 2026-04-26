@@ -237,3 +237,49 @@ body {
     background: #ef4444;
     color: rgb(0, 0, 0);
 }
+
+/* ========================== MOBIL ========================== */
+@media (max-width: 600px) {
+
+    /* navbar se roztáhne do výšky */
+    .navbar {
+        height: auto;
+        flex-direction: column;
+        align-items: center;
+        padding: 12px 20px;
+        gap: 10px;
+    }
+
+    /* logo + název zůstanou na řádku */
+    .nav-left {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* tlačítka Nalezená / Ztracená – z absolutní pozice zpět do toku */
+    .nav-center {
+        position: static;
+        transform: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .btn-found,
+    .btn-lost {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* tlačítko Přihlásit se */
+    .login-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    /* obsah níže, aby nebyl schovaný pod vyšším navbarem */
+    .content {
+        padding-top: 220px;
+    }
+}
