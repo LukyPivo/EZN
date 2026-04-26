@@ -191,4 +191,65 @@ function renderCard(doc) {
     };
 
     cards.prepend(card);
+    applyFilters();
+}
+
+// ── FILTROVÁNÍ ────────────────────────────────────────────────
+let activeFilter = "all";
+
+// stav tlačítek
+document.querySelectorAll(".filter-btn").forEach(btn => {
+    btn.onclick = () => {
+        document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        activeFilter = btn.dataset.filter;
+        applyFilters();
+    };
+});
+
+// vyhledávání podle názvu
+document.getElementById("searchName").addEventListener("input", applyFilters);
+
+// řazení podle datumu
+document.getElementById("sortDate").addEventListener("change", () => {
+    sortCards();
+    applyFilters();
+});
+
+function applyFilters() {
+    const search = document.getElementById("searchName").value.trim().toLowerCase();
+
+    document.querySelectorAll(".card").forEach(card => {
+        const isDone   = card.classList.contains("done");
+        const isFound  = card.classList.contains("found");
+        const isLost   = card.classList.contains("lost");
+        const name     = (card.querySelector("h3")?.textContent || "").toLowerCase();
+
+        // stav filter
+        let statusMatch = false;
+        if (activeFilter === "all")   statusMatch = true;
+        if (activeFilter === "found") statusMatch = isFound && !isDone;
+        if (activeFilter === "lost")  statusMatch = isLost  && !isDone;
+        if (activeFilter === "done")  statusMatch = isDone;
+
+        // název filter
+        const nameMatch = name.includes(search);
+
+        card.style.display = (statusMatch && nameMatch) ? "" : "none";
+    });
+}
+
+function sortCards() {
+    const dir = document.getElementById("sortDate").value;
+    const cardList = Array.from(document.querySelectorAll(".card"));
+
+    cardList.sort((a, b) => {
+        const dateA = a.querySelector("p:nth-child(3)")?.textContent || "";
+        const dateB = b.querySelector("p:nth-child(3)")?.textContent || "";
+        return dir === "asc"
+            ? dateA.localeCompare(dateB)
+            : dateB.localeCompare(dateA);
+    });
+
+    cardList.forEach(c => cards.appendChild(c));
 }

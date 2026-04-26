@@ -2,7 +2,7 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evidence GHB ztrát</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" type="image/x-icon" href="logoghb.png">
@@ -25,6 +25,29 @@
 </header>
 
 <main class="content">
+
+    <!-- FILTR -->
+    <div class="filter-bar">
+
+        <!-- stav -->
+        <div class="filter-group">
+            <button class="filter-btn active" data-filter="all">Vše</button>
+            <button class="filter-btn" data-filter="found">Nalezená</button>
+            <button class="filter-btn" data-filter="lost">Ztracená</button>
+            <button class="filter-btn" data-filter="done">Vyřízená</button>
+        </div>
+
+        <!-- datum -->
+        <select id="sortDate" class="filter-select">
+            <option value="desc">Nejnovější</option>
+            <option value="asc">Nejstarší</option>
+        </select>
+
+        <!-- název -->
+        <input id="searchName" type="text" placeholder="🔍 Hledat podle názvu..." class="filter-search">
+
+    </div>
+
     <div id="cards" class="cards"></div>
 </main>
 
@@ -48,7 +71,7 @@
     </div>
 </div>
 
-<!-- Login modaal -->
+<!-- Login modal -->
 <div class="modal" id="loginModal">
     <div class="modal-box">
         <h2>Přihlášení</h2>

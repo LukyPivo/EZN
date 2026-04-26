@@ -238,6 +238,79 @@ body {
     color: rgb(0, 0, 0);
 }
 
+/* ========================== FILTR ========================== */
+.filter-bar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.filter-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: white;
+    border: 2px solid #e2e8f0;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #555;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+    border-color: #ff7a00;
+    color: #ff7a00;
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: #ff7a00;
+    border-color: #ff7a00;
+    color: white;
+    box-shadow: 0 4px 14px rgba(255,122,0,0.4);
+}
+
+.filter-select {
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 2px solid #e2e8f0;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    background: white;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.filter-select:focus {
+    border-color: #ff7a00;
+}
+
+.filter-search {
+    flex: 1;
+    min-width: 180px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: 2px solid #e2e8f0;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.filter-search:focus {
+    border-color: #ff7a00;
+    box-shadow: 0 0 0 3px rgba(255,122,0,0.15);
+}
+
 /* ========================== MOBIL ========================== */
 @media (max-width: 600px) {
 
@@ -295,5 +368,21 @@ body {
     /* karty víc dolu – nezasahují do tlačítek */
     .content {
         padding-top: 290px;
+    }
+
+    /* filtr na mobilu pod sebou */
+    .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .filter-group {
+        justify-content: center;
+    }
+
+    .filter-select,
+    .filter-search {
+        width: 100%;
     }
 }
