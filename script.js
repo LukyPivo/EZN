@@ -1,6 +1,6 @@
 //FIREBASE CONFIG
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY, 
+  apiKey: "AIzaSyCpdBUnMwa7LR2_ZONu7BUG3trooman_Q4",
   authDomain: "ghbztraty.firebaseapp.com",
   projectId: "ghbztraty",
   storageBucket: "ghbztraty.appspot.com",
