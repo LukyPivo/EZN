@@ -1,12 +1,11 @@
 //FIREBASE CONFIG
 const firebaseConfig = {
-    apiKey: "AIzaSyCpdBUnMwa7LR2_ZONu7BUG3trooman_Q4",
-    authDomain: "ghb-evidence.firebaseapp.com",
-    projectId: "ghb-evidence",
-    storageBucket: "ghb-evidence.firebasestorage.app",
-    messagingSenderId: "473485992439",
-    appId: "1:473485992439:web:1150e92edbbe55c3594ef2",
-    measurementId: "G-JQGNHWTQ28"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY, 
+  authDomain: "ghbztraty.firebaseapp.com",
+  projectId: "ghbztraty",
+  storageBucket: "ghbztraty.appspot.com",
+  messagingSenderId: "36005891398",
+  appId: "1:36005891398:web:7798369528f1be88127393"
 };
 
 firebase.initializeApp(firebaseConfig);
