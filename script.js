@@ -1,10 +1,10 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyCpdBUnMwa7LR2_ZONu7BUG3trooman_Q4", 
+  apiKey: "AIzaSyBKK_hZTvMV_uNS2J8Ssy8dqXGhzsRVmFA",
   authDomain: "ghbztraty.firebaseapp.com",
   projectId: "ghbztraty",
-  storageBucket: "ghbztraty.appspot.com",
-  messagingSenderId: "36005891398",
-  appId: "1:36005891398:web:7798369528f1be88127393"
+  storageBucket: "ghbztraty.firebasestorage.app",
+  messagingSenderId: "87450064157",
+  appId: "1:87450064157:web:7437b4042ecc30e1717df4"
 };
 firebase.initializeApp(firebaseConfig);
 const db   = firebase.firestore();
