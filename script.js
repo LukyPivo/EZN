@@ -1,13 +1,11 @@
-//FIREBASE CONFIG
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY, 
+  apiKey: "AIzaSyCpdBUnMwa7LR2_ZONu7BUG3trooman_Q4", 
   authDomain: "ghbztraty.firebaseapp.com",
   projectId: "ghbztraty",
   storageBucket: "ghbztraty.appspot.com",
   messagingSenderId: "36005891398",
   appId: "1:36005891398:web:7798369528f1be88127393"
 };
-
 firebase.initializeApp(firebaseConfig);
 const db   = firebase.firestore();
 const auth = firebase.auth();
