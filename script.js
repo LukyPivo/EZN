@@ -1,5 +1,5 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyBKK_hZTvMV_uNS2J8Ssy8dqXGhzsRVmFA",
+  apiKey: process.env.NEXT_PUBLIC_API_KEY,
   authDomain: "ghbztraty.firebaseapp.com",
   projectId: "ghbztraty",
   storageBucket: "ghbztraty.firebasestorage.app",
